@@ -1,5 +1,6 @@
 public class prueba_tablero {
 
+
     public static void main(String[] args) {
 
             Character[][] tablero;
@@ -20,7 +21,7 @@ public class prueba_tablero {
                     System.out.print("" + m + "" );
                     m++;
                 }
-                tablero[i][j]='X';
+                tablero[i][j]='-';
                 System.out.printf(" %c ",tablero[i][j]);
             }
             System.out.println(" ");
