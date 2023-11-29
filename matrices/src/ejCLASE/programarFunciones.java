@@ -47,6 +47,7 @@ public class programarFunciones {
 
     }
 
+
     static int masStockUnidad(int[] num, int[][]cant){
         int resultado=0,a=0,b=0;
 
@@ -56,7 +57,24 @@ public class programarFunciones {
                 a+=cant[j][i];
 
             }
-            if (a>=0){
+            if (a>=b){
+                resultado=num[i];
+                b=a;
+            }
+        }
+        return resultado;
+    }
+
+    static int menosStockUnidad(int[] num, int[][]cant){
+        int resultado=0,a=0,b=10;
+
+        for (int i = 0; i < cant[0].length ; i++) {
+            a=0;
+            for (int j = 0; j < cant.length ; j++) {
+                a+=cant[j][i];
+
+            }
+            if (a<=b){
                 resultado=num[i];
                 b=a;
             }
@@ -75,6 +93,7 @@ public class programarFunciones {
 
         System.out.println("La tienda con mas stock es :  " + masStockCiudad(tienda,inventario));
         System.out.println("El número con más stock entre todas las tiendas es : " + masStockUnidad(numeros,inventario));
+        System.out.println("El número con menos stock entre todas las tiendas es : " + menosStockUnidad(numeros,inventario));
     }
 
 }
