@@ -1,16 +1,20 @@
+import java.util.Arrays;
+
 public class prueba {
 
-    static void prueba(){
 
-        for (int i = 0; i <5 ; i++) {
-            System.out.printf("\nHola mundo %d",i);
-        }
-
-    }
 
     public static void main(String[] args) {
-        System.out.println("Hola mundo");
-        prueba();
+
+        int[] prueba={4,4,4};
+
+        prueba[0]--;
+
+        while (prueba[0]>0) prueba[0]--;
+
+        System.out.println(Arrays.toString(prueba));
+
+
     }
 
 }

@@ -145,6 +145,57 @@ public class dispararBarcos {
 
     }
     //Esta función transforma la fila en forma de letra a numero para poder usarlo para indicar posición en la matriz
+
+    static void anadirPorDificultad(Character[][] tablero, Character[][] copia,Integer porta, Integer acora, Integer buque, Integer lancha){
+
+        for (int i = 0; i <porta ; i++) {
+            anadirPortaaviones(tablero, copia);
+        }
+
+        for (int i = 0; i <acora ; i++) {
+            anadirAcorazado(tablero,copia);
+
+        }
+        for (int i = 0; i <buque ; i++) {
+            anadirBuque(tablero,copia);
+        }
+        for (int i = 0; i <lancha ; i++) {
+            anadirLancha(tablero,copia);
+
+        }
+        mostrarTablero(tablero);
+        vaciarTablero(copia);
+
+    }
+
+    static void introduceDisparar(Character[][] tablero, Character[][] copia){
+        Scanner key = new Scanner(System.in);
+        Integer bb = 1;
+        String aa = " ";
+
+        System.out.print("Introduce -1 para salir\n");
+        System.out.println("Una fila: ");
+        aa = key.nextLine();
+
+
+        System.out.print("Introduce -1 para salir\n");
+        System.out.println("Una columna: ");
+        bb = key.nextInt();
+
+        key.nextLine();
+
+        disparar(aa,bb,tablero,copia);
+
+    }
+
+    static void jugarHundir(Character[][] tablero, Character[][] copia){
+
+        vaciarTablero(tablero);
+        vaciarTablero(copia);
+        anadirPorDificultad(tablero, copia,1,1,3,5);
+        introduceDisparar(copia,tablero);
+
+    }
     static Integer letraNumero(String fila) {
         Integer resultado;
         switch (fila.toUpperCase()) {
@@ -183,57 +234,20 @@ public class dispararBarcos {
 
 
     public static void main(String[] args) {
-        Scanner key = new Scanner(System.in);
-        Integer bb = 1;
-        String aa = " ";
+
         Character[][] matrizIA, matrizUSER;
         matrizIA =new Character[10][10];
         matrizUSER= new Character[10][10];
 
 
-        vaciarTablero(matrizIA);
-        vaciarTablero(matrizUSER);
+
 
         // Lancha(L) = 1
         //Buque(B) = 3 horizontal
         //Acorazado(Z) = 4 horizontal
         //Portaaviones(P) = 5 verticales
 
-        anadirPortaaviones(matrizIA, matrizUSER);
-
-        for (int i = 0; i <1 ; i++) {
-            anadirAcorazado(matrizIA,matrizUSER);
-
-        }
-        for (int i = 0; i <3 ; i++) {
-            anadirBuque(matrizIA,matrizUSER);
-        }
-        for (int i = 0; i <5 ; i++) {
-            anadirLancha(matrizIA,matrizUSER);
-
-        }
-        mostrarTablero(matrizIA);
-        vaciarTablero(matrizUSER);
-
-        for (int i = 0; i <50 ; i++) {
-            System.out.print("Introduce -1 para salir\n");
-            System.out.println("Una fila: ");
-            aa = key.nextLine();
-
-
-            System.out.print("Introduce -1 para salir\n");
-            System.out.println("Una columna: ");
-            bb = key.nextInt();
-
-            key.nextLine();
-
-            if (letraNumero(aa) <= 0 || bb <= 0) {
-                i=50;
-            } else {disparar(aa,bb,matrizIA,matrizUSER);}
-        }
-
-       /*Ahora hay que hacer un contador puta madre para saber que si se cumplen los cincuenta turnos has perdido
-       * y si sales antes, entonces has ganado*/
+      jugarHundir(matrizIA,matrizUSER);
 
 
 
