@@ -46,8 +46,7 @@ public class programarFunciones {
         return resultado;
 
     }
-
-
+    
     static int masStockUnidad(int[] num, int[][]cant){
         int resultado=0,a=0,b=0;
 

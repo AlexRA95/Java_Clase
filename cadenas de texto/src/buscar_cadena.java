@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class buscar_cadena {
@@ -23,6 +25,8 @@ public class buscar_cadena {
         System.out.println("[1] Para ver todas las palabras.");
         System.out.println("[2] Para buscar palabras por 1 caracter.");
         System.out.println("[3] Para calcular la longitud media de las palabras del array.");
+        System.out.println("[4] Para ver las palabras de una longitud mayor a la pedida.");
+        System.out.println("[5] Para elegir una palabra aleatoria y hacer que las posiciones pares sean mayusculas y las impares minusculas.");
         System.out.println("[0] Para salir.");
         System.out.println("Introduce tu opción: ");
         op = key.nextInt();
@@ -55,6 +59,24 @@ public class buscar_cadena {
         }
     }
 
+    //seguir
+    static void palabraRandom(String[] array){
+        Random ran = new Random();
+        int random;
+        String palabra="";
+        random = ran.nextInt(0,array.length-1);
+
+        for (int i = 0; i <array[random].length() ; i++) {
+            if ((i%2)==0){
+                palabra+=array[random].toLowerCase().charAt(i);
+            }else {palabra+=array[random].toUpperCase().charAt(i);}
+
+        }
+
+        System.out.println(palabra);
+
+    }
+
     static void buscar(String[] array){
         Scanner key =new Scanner(System.in);
         String buscar,prueba;
@@ -64,6 +86,31 @@ public class buscar_cadena {
         for (int i = 0; i < array.length ; i++) {
             if (array[i].contains(buscar)){
                 System.out.println(array[i]);
+            }
+
+        }
+
+    }
+
+    static void palabrasUnicas(String[] array){
+        String[] unico;
+        unico= new String[1];
+
+        for (int i = 0; i < array.length ; i++) {
+            int aa =0;
+            for (int j = 0; j < unico.length ; j++) {
+
+                if (array[i].equals(unico[j])){
+                    aa++;
+                }
+
+                if (aa>0){
+                    j= unico.length;
+                }
+            }
+            if (aa==0){
+                unico[unico.length-1]=array[i];
+                unico=Arrays.copyOf(unico,unico.length+1);
             }
 
         }
@@ -81,6 +128,7 @@ public class buscar_cadena {
                 case 2-> buscar(diccionario);
                 case 3-> media(diccionario);
                 case 4-> palabraMayor(diccionario);
+                case 5-> palabraRandom(diccionario);
                 case 0-> salida=true;
                 default -> System.out.println("Valor invalido");
 

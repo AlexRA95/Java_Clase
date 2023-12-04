@@ -26,63 +26,86 @@ public class hundirLaFlota {
         System.out.println("Introduce tu opción: ");
     }
 
-    public static void main(String[] args) {
+    static void JugarHundir(){
 
         Scanner key =new Scanner(System.in);
+        Integer menuDificultadOpc=0;
+        Boolean errores2=false;
+
+        do {
+            menuJuego();
+            try {
+                menuDificultadOpc= key.nextInt();
+                errores2 = true;
+            } catch (Exception e) {
+                System.out.println("ERROR: DATO NA VALIDO, VUELVA A INTRODUCIR UN DATO");
+                errores2 = false;
+                key.nextLine();
+            }
+        } while (!errores2);
+        switch (menuDificultadOpc){
+            case 1->{
+                System.out.println("PARTIDA DIFICULTAD MUY FÁCIL");
+            }
+            case 2->{
+                System.out.println("PARTIDA DIFICULTAD FÁCIL");
+            }
+            case 3->{
+                System.out.println("PARTIDA DIFICULTAD NORMAL");
+            }
+            case 4->{
+                System.out.println("PARTIDA DIFICULTAD DIFÍCIL");
+            }
+            case 0->{
+                System.out.println("Has vuelto al menú principal.");
+            }
+        }
+
+    }
+
+    static int opcionMenuPrincipal(){
+
+        Scanner key =new Scanner(System.in);
+        Integer menuPrincipalOpc=0;
+        Boolean errores1=false;
+
+        do {
+            menuPrincipal();
+            try {
+                menuPrincipalOpc=key.nextInt();
+                errores1 = true;
+            } catch (Exception e) {
+                System.out.println("ERROR: DATO NA VALIDO, VUELVA A INTRODUCIR UN DATO");
+                errores1 = false;
+                key.nextLine();
+
+            }
+
+        } while (!errores1);
+
+        return menuPrincipalOpc;
+
+    }
+
+
+    public static void main(String[] args) {
+
+
         Integer menuPrincipalOpc=0, menuDificultadOpc=0;
         Boolean errores1=false, salida=false, errores2=false;
         /* Meter aqui lo de prueba_tablero*/
 
         while (!salida){
 
-            do {
-                menuPrincipal();
-                try {
-                    menuPrincipalOpc=key.nextInt();
-                    errores1 = true;
-                } catch (Exception e) {
-                    System.out.println("ERROR: DATO NA VALIDO, VUELVA A INTRODUCIR UN DATO");
-                    errores1 = false;
-                    key.nextLine();
 
-                }
 
-            } while (!errores1);
-
-            switch (menuPrincipalOpc){
+            switch (opcionMenuPrincipal()){
                 case 1->{
                     /*INSTRUCCIONES*/
                 }
                 case 2->{
                     /*MENU PARA JUGAR*/
-                    do {
-                        menuJuego();
-                        try {
-                            menuDificultadOpc= key.nextInt();
-                            errores2 = true;
-                        } catch (Exception e) {
-                            System.out.println("ERROR: DATO NA VALIDO, VUELVA A INTRODUCIR UN DATO");
-                            errores2 = false;
-                            key.nextLine();
-                        }
-                    } while (!errores2);
-                        switch (menuDificultadOpc){
-                            case 1->{
-                                System.out.println("PARTIDA DIFICULTAD MUY FÁCIL");
-                            }
-                            case 2->{
-                                System.out.println("PARTIDA DIFICULTAD FÁCIL");
-                            }
-                            case 3->{
-                                System.out.println("PARTIDA DIFICULTAD NORMAL");
-                            }
-                            case 4->{
-                                System.out.println("PARTIDA DIFICULTAD DIFÍCIL");
-                            }
-                            case 0->{
-                                System.out.println("Has vuelto al menú principal.");
-                            }
-                        }
+                   JugarHundir();
                 }
                 case 3->{
                     /*ESTADISTICAS*/
