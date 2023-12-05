@@ -5,197 +5,219 @@ import java.util.Scanner;
 public class dispararBarcos {
 
     //Con esta función rellenamos la matriz de '-' para vaciarla cuando sea necesario
-    static void vaciarTablero(Character[][] tablero){
-        for (int i = 0; i < tablero.length ; i++) {
-            for (int j = 0; j <tablero[i].length ; j++) {
-                tablero[i][j]='-';
+    static void vaciarTablero(Character[][] tablero) {
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                tablero[i][j] = '-';
             }
         }
     }
+
     //Con esta función mostramos la matriz formateada para que se vea lo más parecido a un tablero
-    static void mostrarTablero(Character[][] tablero){
-        Character m= 65;
-        for (int i = 0; i < tablero.length ; i++) {
-            if ( i==0 ){
+    static void mostrarTablero(Character[][] tablero) {
+        Character m = 65;
+        for (int i = 0; i < tablero.length; i++) {
+            if (i == 0) {
                 System.out.print(" ");
-                for (int k = 1; k < tablero[i].length+1 ; k++) {
-                    System.out.print(" " + k +" ");
+                for (int k = 1; k < tablero[i].length + 1; k++) {
+                    System.out.print(" " + k + " ");
                 }
                 System.out.println(" ");
             }
-            for (int j = 0; j < tablero[i].length ; j++) {
-                if (j==0){
+            for (int j = 0; j < tablero[i].length; j++) {
+                if (j == 0) {
 
-                    System.out.print("" + m + "" );
+                    System.out.print("" + m + "");
                     m++;
                 }
-                System.out.print(" " + tablero[i][j] +" ");
+                System.out.print(" " + tablero[i][j] + " ");
             }
             System.out.println(" ");
         }
     }
+
     /*Con esta función hacemos una copia del contenido de una función en otra función
-    * Esto nos sirve para a la hora de rellenar tener una "copia de seguridad" del estado anterior de la matriz
-    * Para rellenar las matrices con barcos, lo que he hecho ha sido generar 2 numeros aleatorios que simulan ser coordenadas
-    * Con esas coordenadas nos colocaremos en una posición en la matriz y desde hay la recorreremos en la dirección indicada del barco
-    * Si al recorrerla encuentra un numero de posiciones vacias seguidas igual al tamaño de ese barco se rellena
-    * En el proceso de recorrerlo, ya hago que las posiciones que recorra sean sustituidas por la letra del barco
-    * Si al recorrerlo no se encuentra en la situacion que queremos, haremos que matriz de la IA se vuelva al estado anterior
-    * El estado anterior es la matriz que verá el usuario, que será una copia del ultimo estado correcto de la matriz*/
-    static void copiarMatriz(Character[][] acopiar, Character[][]copia){
+     * Esto nos sirve para a la hora de rellenar tener una "copia de seguridad" del estado anterior de la matriz
+     * Para rellenar las matrices con barcos, lo que he hecho ha sido generar 2 numeros aleatorios que simulan ser coordenadas
+     * Con esas coordenadas nos colocaremos en una posición en la matriz y desde hay la recorreremos en la dirección indicada del barco
+     * Si al recorrerla encuentra un numero de posiciones vacias seguidas igual al tamaño de ese barco se rellena
+     * En el proceso de recorrerlo, ya hago que las posiciones que recorra sean sustituidas por la letra del barco
+     * Si al recorrerlo no se encuentra en la situacion que queremos, haremos que matriz de la IA se vuelva al estado anterior
+     * El estado anterior es la matriz que verá el usuario, que será una copia del ultimo estado correcto de la matriz*/
+    static void copiarMatriz(Character[][] acopiar, Character[][] copia) {
 
-        for (int i = 0; i < acopiar.length ; i++) {
-            copia[i]= Arrays.copyOf(acopiar[i],acopiar.length);
+        for (int i = 0; i < acopiar.length; i++) {
+            copia[i] = Arrays.copyOf(acopiar[i], acopiar.length);
         }
 
     }
+
     //Esta función sirve para añadir los Portaaviones
-    static void anadirPortaaviones(Character[][] tablero, Character[][] copia){
-        int a, b,sePuede=0;
+    static void anadirPortaaviones(Character[][] tablero, Character[][] copia) {
+        int a, b, sePuede = 0;
         Random ran = new Random();
-        Boolean salir=false;
-        while ( !salir ){
-            sePuede=0;
-            a= ran.nextInt(0,10);
-            b= ran.nextInt(0,10);
+        Boolean salir = false;
+        while (!salir) {
+            sePuede = 0;
+            a = ran.nextInt(0, 10);
+            b = ran.nextInt(0, 10);
             for (int i = a; i < tablero.length; i++) {
-                if (tablero[i][b]=='-'){
+                if (tablero[i][b] == '-') {
                     sePuede++;
-                    tablero[i][b]='P';
+                    tablero[i][b] = 'P';
                 }
-                if (sePuede==5){
-                    i= tablero.length;
+                if (sePuede == 5) {
+                    i = tablero.length;
                 }
             }
-            if (sePuede!=5){
+            if (sePuede != 5) {
                 vaciarTablero(tablero);
-            }else {
-                copiarMatriz(tablero,copia);
-                salir=true;
+            } else {
+                copiarMatriz(tablero, copia);
+                salir = true;
             }
         }
     }
+
     //Esta función sirve para añadir acorazados
-    static void anadirAcorazado(Character[][] tablero, Character[][] copia){
-        int a, b,sePuede=0;
+    static void anadirAcorazado(Character[][] tablero, Character[][] copia) {
+        int a, b, sePuede = 0;
         Random ran = new Random();
-        Boolean salir=false;
-        while ( !salir ){
-            sePuede=0;
-            a= ran.nextInt(0,10);
-            b= ran.nextInt(0,10);
+        Boolean salir = false;
+        while (!salir) {
+            sePuede = 0;
+            a = ran.nextInt(0, 10);
+            b = ran.nextInt(0, 10);
             for (int i = a; i < tablero.length; i++) {
-                if (tablero[b][i]=='-'){
+                if (tablero[b][i] == '-') {
                     sePuede++;
-                    tablero[b][i]='Z';
-                }else {i= tablero.length;}
-                if (sePuede==4){
-                    i= tablero.length;
+                    tablero[b][i] = 'Z';
+                } else {
+                    i = tablero.length;
+                }
+                if (sePuede == 4) {
+                    i = tablero.length;
                 }
             }
-            if (sePuede!=4){
-                copiarMatriz(copia,tablero);
-            }else {
-                copiarMatriz(tablero,copia);
-                salir=true;
+            if (sePuede != 4) {
+                copiarMatriz(copia, tablero);
+            } else {
+                copiarMatriz(tablero, copia);
+                salir = true;
             }
         }
     }
+
     //Esta función sirve para añadir buques
-    static void anadirBuque(Character[][] tablero, Character[][] copia){
-        int a, b,sePuede=0;
+    static void anadirBuque(Character[][] tablero, Character[][] copia) {
+        int a, b, sePuede = 0;
         Random ran = new Random();
-        Boolean salir=false;
-        while ( !salir ){
-            sePuede=0;
-            a= ran.nextInt(0,10);
-            b= ran.nextInt(0,10);
+        Boolean salir = false;
+        while (!salir) {
+            sePuede = 0;
+            a = ran.nextInt(0, 10);
+            b = ran.nextInt(0, 10);
             for (int i = a; i < tablero.length; i++) {
-                if (tablero[b][i]=='-'){
+                if (tablero[b][i] == '-') {
                     sePuede++;
-                    tablero[b][i]='B';
-                }else {i= tablero.length;}
-                if (sePuede==3){
-                    i= tablero.length;
+                    tablero[b][i] = 'B';
+                } else {
+                    i = tablero.length;
+                }
+                if (sePuede == 3) {
+                    i = tablero.length;
                 }
             }
-            if (sePuede!=3){
-                copiarMatriz(copia,tablero);
-            }else {
-                copiarMatriz(tablero,copia);
-                salir=true;
+            if (sePuede != 3) {
+                copiarMatriz(copia, tablero);
+            } else {
+                copiarMatriz(tablero, copia);
+                salir = true;
             }
         }
     }
+
     //Esta función sirve para añadir lanchas
-    static void anadirLancha(Character[][] tablero, Character[][] copia){
+    static void anadirLancha(Character[][] tablero, Character[][] copia) {
 
         int a, b;
         Random ran = new Random();
-        Boolean salir=false;
-        while ( !salir ){
-            a= ran.nextInt(0,10);
-            b= ran.nextInt(0,10);
-            if (tablero[a][b]=='-'){
-                tablero[a][b]='L';
-                copiarMatriz(tablero,copia);
-                salir=true;
-            }else {copiarMatriz(copia,tablero);}
+        Boolean salir = false;
+        while (!salir) {
+            a = ran.nextInt(0, 10);
+            b = ran.nextInt(0, 10);
+            if (tablero[a][b] == '-') {
+                tablero[a][b] = 'L';
+                copiarMatriz(tablero, copia);
+                salir = true;
+            } else {
+                copiarMatriz(copia, tablero);
+            }
         }
 
     }
-    //Esta función transforma la fila en forma de letra a numero para poder usarlo para indicar posición en la matriz
+    //Esta función añade los barcos dependiendo de la dificultad
+    static void anadirPorDificultad(Character[][] tablero, Character[][] copia, Integer porta, Integer acora, Integer buque, Integer lancha) {
 
-    static void anadirPorDificultad(Character[][] tablero, Character[][] copia,Integer porta, Integer acora, Integer buque, Integer lancha){
-
-        for (int i = 0; i <porta ; i++) {
+        for (int i = 0; i < porta; i++) {
             anadirPortaaviones(tablero, copia);
         }
 
-        for (int i = 0; i <acora ; i++) {
-            anadirAcorazado(tablero,copia);
+        for (int i = 0; i < acora; i++) {
+            anadirAcorazado(tablero, copia);
 
         }
-        for (int i = 0; i <buque ; i++) {
-            anadirBuque(tablero,copia);
+        for (int i = 0; i < buque; i++) {
+            anadirBuque(tablero, copia);
         }
-        for (int i = 0; i <lancha ; i++) {
-            anadirLancha(tablero,copia);
+        for (int i = 0; i < lancha; i++) {
+            anadirLancha(tablero, copia);
 
         }
         mostrarTablero(tablero);
         vaciarTablero(copia);
 
     }
-
-    static void introduceDisparar(Character[][] tablero, Character[][] copia){
+    //Esta función pide los valores donde se va a disparar
+    static int introduceDisparar(Character[][] tablero, Character[][] copia) {
         Scanner key = new Scanner(System.in);
-        Integer bb = 1;
+        Boolean valor1=true, valor2=true;
+        Integer bb = 1, tocado = 0;
         String aa = " ";
 
-        System.out.print("Introduce -1 para salir\n");
-        System.out.println("Una fila: ");
-        aa = key.nextLine();
+        do {
+            try {
+                System.out.println("Una fila de la A a la J: ");
+                aa = key.nextLine();
+                valor1=false;
+            }
+            catch (Exception e){
+                System.out.println("ERROR: DATO NA VALIDO, VUELVA A INTRODUCIR UN DATO");
+                valor1=true;
+                key.nextLine();
+            }
+        }while (valor1);
 
-
-        System.out.print("Introduce -1 para salir\n");
-        System.out.println("Una columna: ");
-        bb = key.nextInt();
-
+        do {
+            try {
+                System.out.println("Una columna del 1 al 10: ");
+                bb = key.nextInt();
+                valor2=false;
+            }
+            catch (Exception e){
+                System.out.println("ERROR: DATO NA VALIDO, VUELVA A INTRODUCIR UN DATO");
+                valor2=true;
+                key.nextLine();
+            }
+        }while (valor2);
         key.nextLine();
 
-        disparar(aa,bb,tablero,copia);
+        tocado = disparar(aa, bb, tablero, copia);
+
+        return tocado;
 
     }
-
-    static void jugarHundir(Character[][] tablero, Character[][] copia){
-
-        vaciarTablero(tablero);
-        vaciarTablero(copia);
-        anadirPorDificultad(tablero, copia,1,1,3,5);
-        introduceDisparar(copia,tablero);
-
-    }
+    //Esta función transforma la fila en forma de letra a numero para poder usarlo para indicar posición en la matriz
     static Integer letraNumero(String fila) {
         Integer resultado;
         switch (fila.toUpperCase()) {
@@ -213,33 +235,72 @@ public class dispararBarcos {
         }
         return resultado;
     }
-
-    static void disparar(String fila, Integer columna, Character[][] matrizOculta, Character[][] matrizVisible){
-
+    //Esta función comprueba las posiciones donde se dispara
+    static int disparar(String fila, Integer columna, Character[][] matrizVisible, Character[][] matrizOculta) {
+        Integer tocado = -1;
         if (letraNumero(fila) > matrizOculta.length) {
             System.out.println("ERROR, la fila es incorrecta.");
+
         } else if (columna > matrizOculta.length) {
             System.out.println("ERROR, la columna es incorrecta.");
-        } else {
-            if (matrizOculta[letraNumero(fila) - 1][columna - 1]!='-'){
-                matrizVisible[letraNumero(fila) - 1][columna - 1]='X';
+
+        } else if (letraNumero(fila)<=0){
+            System.out.println("ERROR, la fila es incorrecta.");
+        }else if (columna<= matrizOculta.length){
+            System.out.println("ERROR, la columna es incorrecta.");
+        }
+        else {
+
+            if (matrizVisible[letraNumero(fila) - 1][columna - 1] == 'O'){
+                System.out.println("YA HAS DISPARADO AHÍ");
+            } else if (matrizVisible[letraNumero(fila) - 1][columna - 1] == 'X') {
+                System.out.println("YA HAS DISPARADO AHÍ");
+            }else if (matrizOculta[letraNumero(fila) - 1][columna - 1] == '-') {
+                System.out.println("AGUA");
+                matrizVisible[letraNumero(fila) - 1][columna - 1] = 'O';
+                tocado = 0;
+            } else if (matrizOculta[letraNumero(fila) - 1][columna - 1] != '-') {
+                System.out.println("TOCADO");
+                matrizVisible[letraNumero(fila) - 1][columna - 1] = 'X';
+                tocado = 1;
+            }
+            mostrarTablero(matrizVisible);
+
+        }
+        return tocado;
+
+    }
+    //Esta función inicializa la partida
+    static void jugarPartida(Character[][] tablero, Character[][] copia,Integer turnos, Integer porta, Integer acora, Integer buque, Integer lancha) {
+        Integer jugando=0,moveValido;
+        vaciarTablero(tablero);
+        vaciarTablero(copia);
+        anadirPorDificultad(tablero, copia, porta, acora, buque, lancha);
+        for (int i = 1; i <= turnos; i++) {
+            System.out.printf("\nTURNO %d \n",i);
+            moveValido=introduceDisparar(copia, tablero);
+            if (moveValido==-1){
+                i--;
             }else {
-                matrizVisible[letraNumero(fila) - 1][columna - 1]='O';
+                jugando+=moveValido;
             }
 
-            mostrarTablero(matrizVisible);
+            if (jugando==(porta+acora+buque+lancha)){
+                System.out.println("HAS GANADO!!!!!!");
+                i=turnos;
+            }
         }
-
+        if (jugando!=(porta+acora+buque+lancha)){
+            System.out.println("HAS PERDIDO!!!!!!");
+        }
     }
 
 
     public static void main(String[] args) {
 
         Character[][] matrizIA, matrizUSER;
-        matrizIA =new Character[10][10];
-        matrizUSER= new Character[10][10];
-
-
+        matrizIA = new Character[10][10];
+        matrizUSER = new Character[10][10];
 
 
         // Lancha(L) = 1
@@ -247,9 +308,7 @@ public class dispararBarcos {
         //Acorazado(Z) = 4 horizontal
         //Portaaviones(P) = 5 verticales
 
-      jugarHundir(matrizIA,matrizUSER);
-
-
+        jugarPartida(matrizIA, matrizUSER,10,0,0,0,10);
 
 
     }

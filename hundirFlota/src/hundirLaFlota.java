@@ -14,6 +14,8 @@ public class hundirLaFlota {
 
     }
 
+
+
     /*Menú de jugar partida con las dificultades*/
     static void menuJuego(){
         System.out.println();
@@ -25,8 +27,8 @@ public class hundirLaFlota {
         System.out.println("Introduce [0] para volver al menú principal.");
         System.out.println("Introduce tu opción: ");
     }
-
-    static void JugarHundir(){
+    /*Menú donde elegimos la dificultad de la partida*/
+    static void JugarHundirElegirDificultad(){
 
         Scanner key =new Scanner(System.in);
         Integer menuDificultadOpc=0;
@@ -62,7 +64,7 @@ public class hundirLaFlota {
         }
 
     }
-
+    /*Se muestra el menú de opciones de juego y se elige da una opción que se usará en el switch  del main*/
     static int opcionMenuPrincipal(){
 
         Scanner key =new Scanner(System.in);
@@ -89,10 +91,10 @@ public class hundirLaFlota {
 
 
     public static void main(String[] args) {
-
-
-        Integer menuPrincipalOpc=0, menuDificultadOpc=0;
-        Boolean errores1=false, salida=false, errores2=false;
+        Boolean salida=false;
+        Character[][] matrizIA, matrizUSER;
+        matrizIA =new Character[10][10];
+        matrizUSER= new Character[10][10];
         /* Meter aqui lo de prueba_tablero*/
 
         while (!salida){
@@ -105,7 +107,7 @@ public class hundirLaFlota {
                 }
                 case 2->{
                     /*MENU PARA JUGAR*/
-                   JugarHundir();
+                    //JugarHundirElegirDificultad(matrizIA,matrizUSER);
                 }
                 case 3->{
                     /*ESTADISTICAS*/
