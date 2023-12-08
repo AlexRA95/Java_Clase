@@ -174,7 +174,7 @@ public class dispararBarcos {
             anadirLancha(tablero, copia);
 
         }
-        mostrarTablero(tablero);
+        mostrarTablero(tablero);//Borrar, clave: JDTONTO
         vaciarTablero(copia);
 
     }
@@ -246,18 +246,18 @@ public class dispararBarcos {
 
         } else if (letraNumero(fila)<=0){
             System.out.println("ERROR, la fila es incorrecta.");
-        }else if (columna<= matrizOculta.length){
+        }else if (columna<=0){
             System.out.println("ERROR, la columna es incorrecta.");
         }
         else {
 
-            if (matrizVisible[letraNumero(fila) - 1][columna - 1] == 'O'){
+            if (matrizVisible[letraNumero(fila) - 1][columna - 1] == 'A'){
                 System.out.println("YA HAS DISPARADO AHÍ");
             } else if (matrizVisible[letraNumero(fila) - 1][columna - 1] == 'X') {
                 System.out.println("YA HAS DISPARADO AHÍ");
             }else if (matrizOculta[letraNumero(fila) - 1][columna - 1] == '-') {
                 System.out.println("AGUA");
-                matrizVisible[letraNumero(fila) - 1][columna - 1] = 'O';
+                matrizVisible[letraNumero(fila) - 1][columna - 1] = 'A';
                 tocado = 0;
             } else if (matrizOculta[letraNumero(fila) - 1][columna - 1] != '-') {
                 System.out.println("TOCADO");
@@ -271,8 +271,8 @@ public class dispararBarcos {
 
     }
     //Esta función inicializa la partida
-    static void jugarPartida(Character[][] tablero, Character[][] copia,Integer turnos, Integer porta, Integer acora, Integer buque, Integer lancha) {
-        Integer jugando=0,moveValido;
+    static Integer jugarPartida(Character[][] tablero, Character[][] copia,Integer turnos, Integer porta, Integer acora, Integer buque, Integer lancha) {
+        Integer jugando=0,moveValido,ganado=0;
         vaciarTablero(tablero);
         vaciarTablero(copia);
         anadirPorDificultad(tablero, copia, porta, acora, buque, lancha);
@@ -287,12 +287,16 @@ public class dispararBarcos {
 
             if (jugando==(porta+acora+buque+lancha)){
                 System.out.println("HAS GANADO!!!!!!");
+                ganado=1;
                 i=turnos;
             }
         }
         if (jugando!=(porta+acora+buque+lancha)){
             System.out.println("HAS PERDIDO!!!!!!");
+            ganado=0;
         }
+
+        return ganado;
     }
 
 
