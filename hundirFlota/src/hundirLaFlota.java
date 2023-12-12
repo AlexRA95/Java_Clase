@@ -1,11 +1,15 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.sql.SQLOutput;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+//Alejandro Rodríguez Álvarez
+//DAW 1B
+
 public class hundirLaFlota {
     public static Integer[][] estadisticasPartida={{0,0,0,0},{0,0,0,0}};
-
     /*Función para ver el menu prinicpal y el tÍtulo*/
     static void menuPrincipal(){
         System.out.println("-------- HUNDIR LA FLOTA --------");
@@ -16,7 +20,6 @@ public class hundirLaFlota {
         System.out.println("Introduce tu opción: ");
 
     }
-
     //Con esta función rellenamos la matriz de '-' para vaciarla cuando sea necesario
     static void vaciarTablero(Character[][] tablero) {
         for (int i = 0; i < tablero.length; i++) {
@@ -25,7 +28,6 @@ public class hundirLaFlota {
             }
         }
     }
-
     //Con esta función mostramos la matriz formateada para que se vea lo más parecido a un tablero
     static void mostrarTablero(Character[][] tablero) {
         Character m = 65;
@@ -48,7 +50,6 @@ public class hundirLaFlota {
             System.out.println(" ");
         }
     }
-
     /*Con esta función hacemos una copia del contenido de una función en otra función
      * Esto nos sirve para a la hora de rellenar tener una "copia de seguridad" del estado anterior de la matriz
      * Para rellenar las matrices con barcos, lo que he hecho ha sido generar 2 numeros aleatorios que simulan ser coordenadas
@@ -64,7 +65,6 @@ public class hundirLaFlota {
         }
 
     }
-
     //Esta función sirve para añadir los Portaaviones
     static void anadirPortaaviones(Character[][] tablero, Character[][] copia) {
         int a, b, sePuede = 0;
@@ -91,7 +91,6 @@ public class hundirLaFlota {
             }
         }
     }
-
     //Esta función sirve para añadir acorazados
     static void anadirAcorazado(Character[][] tablero, Character[][] copia) {
         int a, b, sePuede = 0;
@@ -120,7 +119,6 @@ public class hundirLaFlota {
             }
         }
     }
-
     //Esta función sirve para añadir buques
     static void anadirBuque(Character[][] tablero, Character[][] copia) {
         int a, b, sePuede = 0;
@@ -269,11 +267,11 @@ public class hundirLaFlota {
             } else if (matrizVisible[letraNumero(fila) - 1][columna - 1] == 'X') {
                 System.out.println("YA HAS DISPARADO AHÍ");
             }else if (matrizOculta[letraNumero(fila) - 1][columna - 1] == '-') {
-                System.out.println("AGUA");
+                System.out.println("------AGUA------");
                 matrizVisible[letraNumero(fila) - 1][columna - 1] = 'A';
                 tocado = 0;
             } else if (matrizOculta[letraNumero(fila) - 1][columna - 1] != '-') {
-                System.out.println("TOCADO");
+                System.out.println("------TOCADO------");
                 matrizVisible[letraNumero(fila) - 1][columna - 1] = 'X';
                 tocado = 1;
             }
@@ -290,7 +288,7 @@ public class hundirLaFlota {
         vaciarTablero(copia);
         anadirPorDificultad(tablero, copia, porta, acora, buque, lancha);
         for (int i = 1; i <= turnos; i++) {
-            System.out.printf("\nTURNO %d \n",i);
+            System.out.printf("\nTURNO %d de %d \n",i,turnos);
             moveValido=introduceDisparar(copia, tablero);
             if (moveValido==-1){
                 i--;
@@ -298,22 +296,22 @@ public class hundirLaFlota {
                 jugando+=moveValido;
             }
 
-            if (jugando==(porta+acora+buque+lancha)){
+            if (jugando==((porta*5)+(acora*4)+(buque*3)+lancha)){
                 System.out.println("HAS GANADO!!!!!!");
                 ganado=1;
                 i=turnos;
             }
         }
-        if (jugando!=(porta+acora+buque+lancha)){
+        if (jugando!=((porta*5)+(acora*4)+(buque*3)+lancha)){
             System.out.println("HAS PERDIDO!!!!!!");
             ganado=0;
         }
 
         return ganado;
     }
-
     /*Menú de jugar partida con las dificultades*/
     static void menuJuego(){
+        System.out.println("------DIFICULTAD------");
         System.out.println();
         System.out.println("Introduce [1] para jugar el modo MUY FÁCIL.");
         System.out.println("Introduce [2] para jugar el modo FÁCIL.");
@@ -370,8 +368,14 @@ public class hundirLaFlota {
                 }
                 estadisticasPartida[0][3]++;
             }
+            case 5->{
+                explicarDificultad();
+            }
             case 0->{
                 System.out.println("Has vuelto al menú principal.");
+            }
+            default -> {
+                System.out.println("ERROR: DATO INCORRECTO.");
             }
         }
     }
@@ -427,9 +431,32 @@ public class hundirLaFlota {
         System.out.println(" ");
 
     }
-
+    //Función donde se explican los conceptos básicos del programa.
     static void instruccionesJuego(){
-        
+        System.out.println("------INSTRUCCIONES------");
+        System.out.println(" ");
+        System.out.println("1. La máquina colocará barcos de manera aleatoria en un tablero 10x10 barcos.");
+        System.out.println("2. Hay 4 tipos de barcos: ");
+        System.out.println("    LANCHA (L): ocupa una casilla del tablero.");
+        System.out.println("    BUQUE (B): ocupa 3 casillas horizontales consecutivas del tablero.");
+        System.out.println("    ACORAZADO (Z): ocupa 4 casillas horizontales consecutivas del tablero.");
+        System.out.println("    PORTAAVIONES (P): ocupa 5 casillas verticales consecutivas del tablero.");
+        System.out.println("Una vez colocados verás un tablero vacio, donde podras disparar.");
+        System.out.println("Para disparar introducirás la fila numerada de la A a la J y la columna numerada del 1 al 10.");
+        System.out.println("Una vez disparado, si la casilla contiene un barco, se marcará en tu tablero con una X y se te indicará con un TOCADO que has acertado.");
+        System.out.println("En caso de que la casilla no contenga un barco, se te indicará con una A y se te dirá que has tocado AGUA.");
+        System.out.println("Tendras un número concreto de turnos para disparar a todos los barcos, estos dependerán de la dificultad.");
+    }
+    //Esta función explica las diferencias entre dificultades.
+    static void explicarDificultad(){
+        System.out.println("------DIFERENCIAS DIFICULTAD------");
+        System.out.println("MUY FACIL:  La máquina colocará 10 lanchas en el tablero y el tendras 50 intentos para hundirlos todos.");
+        System.out.println("FACIL: La máquina colocará 10 barcos (5 lanchas, 3 buques, 1 acorazado\n" +
+                "y 1 portaaviones) en el tablero y tendras 50 intentos para hundirlos todos.");
+        System.out.println("MEDIO: La máquina colocará 5 barcos (2 lanchas, 1 buque, 1 acorazado\n" +
+                "y 1 portaaviones) en el tablero y tendras 30 intentos para hundirlos todos.");
+        System.out.println("DIFICIL:  La máquina colocará 2 barcos (1 lancha y 1 buque) en el tablero\n" +
+                "y tendras 10 intentos para hundirlos todos.");
     }
 
 
@@ -447,6 +474,7 @@ public class hundirLaFlota {
             switch (opcionMenuPrincipal()){
                 case 1->{
                     /*INSTRUCCIONES*/
+                    instruccionesJuego();
                 }
                 case 2->{
                     /*MENU PARA JUGAR*/
