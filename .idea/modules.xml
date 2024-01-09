@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Cosas_mas_serias/Cosas_mas_serias.iml" filepath="$PROJECT_DIR$/Cosas_mas_serias/Cosas_mas_serias.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EJ_Bucle/EJ_Bucle.iml" filepath="$PROJECT_DIR$/EJ_Bucle/EJ_Bucle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Hola_mundo/Hola_mundo.iml" filepath="$PROJECT_DIR$/Hola_mundo/Hola_mundo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java_Clase.iml" filepath="$PROJECT_DIR$/.idea/Java_Clase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arrays y cosas/arrays y cosas.iml" filepath="$PROJECT_DIR$/arrays y cosas/arrays y cosas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cadenas de texto/cadenas de texto.iml" filepath="$PROJECT_DIR$/cadenas de texto/cadenas de texto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/casino/casino.iml" filepath="$PROJECT_DIR$/casino/casino.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ej_clase/ej_clase.iml" filepath="$PROJECT_DIR$/ej_clase/ej_clase.iml" />
+      <module fileurl="file://$PROJECT_DIR$/funciones/funciones.iml" filepath="$PROJECT_DIR$/funciones/funciones.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hundirFlota/hundirFlota.iml" filepath="$PROJECT_DIR$/hundirFlota/hundirFlota.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaCasa/javaCasa.iml" filepath="$PROJECT_DIR$/javaCasa/javaCasa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mas_bucles/mas_bucles.iml" filepath="$PROJECT_DIR$/mas_bucles/mas_bucles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/matrices/matrices.iml" filepath="$PROJECT_DIR$/matrices/matrices.iml" />
+      <module fileurl="file://$PROJECT_DIR$/piedra_papel_tijera_lagarto_spok/piedra_papel_tijera_lagarto_spok.iml" filepath="$PROJECT_DIR$/piedra_papel_tijera_lagarto_spok/piedra_papel_tijera_lagarto_spok.iml" />
+    </modules>
+  </component>
+</project>
