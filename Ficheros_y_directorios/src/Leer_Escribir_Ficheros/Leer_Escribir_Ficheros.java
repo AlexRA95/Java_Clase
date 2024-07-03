@@ -43,7 +43,7 @@ public class Leer_Escribir_Ficheros {
         
 
         try {
-            Files.write(archivo,lineas);
+            Files.write(archivo,lineas,StandardOpenOption.APPEND);
         }catch (IOException e){}
 
 
